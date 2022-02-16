@@ -1,4 +1,4 @@
-# De fish-shell - TODO betere titel met dom grapje over 'vissen'
+# Voel je als een vis in het water met de fish-shell
 
 Het eerste dat ik installeer op een nieuwe laptop? 
 De *fish*-shell. 
@@ -21,7 +21,7 @@ Met `→` of `Ctrl + F` kun je de suggestie die fish doet accepteren.
 Met `Alt + →` accepteer je de suggestie per woord. 
 Of je kunt gewoon verder typen om de suggestie die gedaan is te negeren. 
 
-<TODO: screenshot met automatische suggesties>
+![Fish autosuggestions](images/fish-autosuggestion.png)
 
 ## Tab completion
 
@@ -36,7 +36,7 @@ Bij een programma met een grafische interface is de *discoverability* vaak hoog,
 Bij een command-line interface is de *discoverability* een stuk lager, omdat de mogelijkheden verstopt zitten in de *man pages*, en die moet je als gebruiker zelf weten te vinden om een expert te worden.
 Door de *man pages* aan te bieden via *tab completion* krijgen nieuwe gebruikers in een kortere hoeveelheid tijd meer mogelijkheden te zien, wat de gebruiker helpt in het proces om expert in het product te worden.
 
-<TODO: screenshot met tab completion>
+![Fish tab completion](images/fish-tab-completion.png)
 
 ## Syntax highlighting
 
@@ -59,7 +59,7 @@ Als je alleen geinteresseerd bent in een *dynamic prompt* (waarbij je prompt dir
 Deze custom prompt werkt snel en is uit te breiden met allerlei soorten meta-informatie.
 Bovendien werkt Starship met alle bekende shells, en dus ook met fish!
 
-<TODO: screenshot van fish met Starship>
+![Fish met Starship](images/fish-with-starship.png)
 
 ## Is de fish-shell iets voor mij?
 
@@ -73,11 +73,12 @@ Voor oudere Windows-versies zul je Cygwin of MSYS2 nodig hebben om fish te kunne
 
 ## Tot slot
 
-TODO: slot met dom grapje over 'vissen'
+Dus probeer de fish-shell eens uit! 
+Wie weet past het wel bij je, en voel je je in een mum van tijd als een vis in het water.
 
 ## Referenties
 
-* [Website](https://fishshell.com/)
+* [fishshell.com](https://fishshell.com/)
 * [GitHub](https://github.com/fish-shell/fish-shell/)
 * [Fish tutorial](https://fishshell.com/docs/current/tutorial.html)
 * [Ontwerpprincipes van fish](https://fishshell.com/docs/current/design.html)
