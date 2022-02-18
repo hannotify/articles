@@ -2,14 +2,14 @@
 
 Het eerste dat ik installeer op een nieuwe laptop? 
 De *fish*-shell. 
-Je went enorm snel aan handige features als suggesties uit je shellhistorie, tab completion op o.a. Git-commando's en syntax highlighting. 
+Je went enorm snel aan handige features als suggesties uit je shellhistorie, tab completion en syntax highlighting. 
 Ook de web-based configuratie is erg gebruiksvriendelijk!
 
 ## Fish?
 
 'Fish' staat voor **F**riendly **I**nteractive **SH**ell en is een command-line shell die zich voornamelijk richt op gebruiksvriendelijkheid, waarbij de expressiviteit niet in het geding mag zijn.
 Een ander belangrijk ontwerpprincipe is dat in fish alles mogelijk moet zijn wat ook in andere *shells* mogelijk is.
-De belangrijkste features van fish bespreek ik in dit artikel.
+De belangrijkste features van fish behandel ik in dit artikel.
 
 ## Automatische suggesties
 
@@ -19,43 +19,44 @@ Handig voor als je een lang commando opnieuw nodig hebt.
 
 Met `→` of `Ctrl + F` kun je de suggestie die fish doet accepteren. 
 Met `Alt + →` accepteer je de suggestie per woord. 
-Of je kunt gewoon verder typen om de suggestie die gedaan is te negeren. 
+Of je kunt gewoon verder typen om de suggestie die gedaan is te negeren en nieuwe suggesties te veroorzaken. 
 
 ![Fish autosuggestions](images/fish-autosuggestion.png)
 
 ## Tab completion
 
 Als je in fish expliciet op `Tab` drukt, toont fish de mogelijke commando's (of commando-opties, wanneer je al een commando hebt staan) in een lijst. 
-Deze lijst genereert fish automatisch door de geïnstalleerde *man pages* van tevoren te parsen.
+Deze lijst heeft fish van tevoren al gegenereerd door de *man pages* op je systeem te parsen.
 Met de pijltjestoetsen kun je door de lijst heen lopen.
 Zo vind je snel het commando of de commando-optie die je nodig hebt.
 
 Dit is voor de makers van fish een belangrijke feature, omdat één van hun doelen is om nieuwe gebruikers snel experts te laten worden. 
 En een belangrijk criterium voor de snelheid van dat proces is *discoverability*: de mate waarin een nieuwe gebruiker de mogelijkheden van een softwareprogramma zelf kan ontdekkken.
 Bij een programma met een grafische interface is de *discoverability* vaak hoog, omdat de mogelijkheden direct zichtbaar zijn in de interface.
-Bij een command-line interface is de *discoverability* een stuk lager, omdat de mogelijkheden verstopt zitten in de *man pages*, en die moet je als gebruiker zelf weten te vinden om een expert te worden.
-Door de *man pages* aan te bieden via *tab completion* krijgen nieuwe gebruikers in een kortere hoeveelheid tijd meer mogelijkheden te zien, wat de gebruiker helpt in het proces om expert in het product te worden.
+Bij een command-line interface is de *discoverability* daarentegen een stuk lager, omdat de mogelijkheden verstopt zitten in de *man pages*, en die moet je als gebruiker zelf weten te vinden om een expert te worden.
+Door de *man pages* aan te bieden via *tab completion* krijgen nieuwe gebruikers in een kortere hoeveelheid tijd meer mogelijkheden te zien, waardoor de gebruiker het programma sneller leert gebruiken.
 
 ![Fish tab completion](images/fish-tab-completion.png)
 
 ## Syntax highlighting
 
-Fish geeft ongeldige commando's of niet-bestaande bestandslocaties standaard in rode tekst weer. 
+Fish helpt je nog een stapje verder als gebruiker door *syntax highlighting* toe te passen op je commando's.
+Ongeldige commando's of niet-bestaande bestandslocaties worden altijd in rode tekst weergegeven.
 Een geldig commando heeft standaard groene tekst, terwijl een geldige bestandslocatie altijd wordt onderstreept. 
 
 ## Web-based configuratie
 
 De opmaak die fish standaard gebruikt voor de *syntax highlighting* is uiteraard te wijzigen.
 Hiertoe kun je het commando `fish_config` uitvoeren. 
-Je krijgt dan een web-interface te zien waarmee je naast opmaak ook functies en aliassen in kunt stellen.
+Je krijgt dan een web-interface te zien waarmee je naast opmaak ook functies, aliassen en het uiterlijk van je prompt in kunt stellen.
 Na het wijzigen van een instelling voert fish onder water het commando uit waarmee de instelling wordt geactiveerd.
 
 ## Uitbreidingen
 
-Als je nu al gewend bent aan shelluitbreidingen doordat je *oh-my-bash* of *oh-my-zsh* gebruikt, dan hoef je daar na een migratie naar fish niet zonder te zitten.
+Als je nu al gewend bent aan shelluitbreidingen doordat je bijvoorbeeld *oh-my-bash* of *oh-my-zsh* gebruikt, dan hoef je daar na een migratie naar fish niet zonder te zitten.
 De extensie *oh-my-fish* levert misschien niet de meest originele naam op, maar geeft je wel legio mogelijkheiden om je shell uit te breiden.
 
-Als je alleen geinteresseerd bent in een *dynamic prompt* (waarbij je prompt direct informatie geeft over git-repositories, bijvoorbeeld) en niet in andere uitbreidingen, dan is een product als Starship vaak al voldoende. 
+Als je alleen geinteresseerd bent in een *dynamic prompt* (waarbij je prompt direct informatie geeft over Git-repositories, bijvoorbeeld) en niet in andere uitbreidingen, dan is een product als Starship vaak al voldoende. 
 Deze custom prompt werkt snel en is uit te breiden met allerlei soorten meta-informatie.
 Bovendien werkt Starship met alle bekende shells, en dus ook met fish!
 
@@ -71,10 +72,10 @@ Qua besturingssystemen is Fish beschikbaar voor Linux en macOS.
 Op Windows 10 kun je het draaien binnen het Windows Subsystem for Linux. 
 Voor oudere Windows-versies zul je Cygwin of MSYS2 nodig hebben om fish te kunnen draaien.
 
-## Tot slot
+## Probeer het uit!
 
 Dus probeer de fish-shell eens uit! 
-Wie weet past het wel bij je, en voel je je in een mum van tijd als een vis in het water.
+Wie weet past het wel bij je, en voel je je met deze gebruiksvriendelijke shell in een mum van tijd als een vis in het water.
 
 ## Referenties
 
