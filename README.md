@@ -1,8 +1,8 @@
 # "articles"
 
-A collection of articles that I wrote.
+A collection of articles I wrote.
 
-# Concert to document   
+# Convert to document   
 
 To convert the markdown files, you can use [Pandoc](https://pandoc.org/).
 
