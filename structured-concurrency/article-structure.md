@@ -66,6 +66,8 @@
 
 ### Custom Shutdown Policies
 
+(optioneel, als er nog woorden over zijn)
+
 ## How to use
 
 [naam]
@@ -78,4 +80,16 @@
 
 ## References
 
+[1]
+[2] 
+
+## Bios
+
+### Bram
+
+[Bram]
+
+### Hanno
+
+[Hanno]
 
