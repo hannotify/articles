@@ -26,52 +26,51 @@ We kennen allemaal de term spaghetticode. Deze metafoor komt voort uit code die 
 Structured programming is daarentegen een paradigma dat gebruik maakt van control flow statements als `if/else` en `while/for` en daarnaast block structures en subroutines kent. De term werd bedacht door de Nederlander Dijkstra in 1968. Spaghetti verandert hierdoor in een hiërarchie van afgeschermde en samenhangende blokken code met ieder hun eigen _scope_. Blokken code (bijvoorbeeld functies) kunnen met elkaar communiceren via duidelijke entry en exit points en een "two way jump": na het aanroepen keer je terug.
 
 ## Unstructured concurrency
-Ook concurrent programming kan gestructureerd of ongestructureerd in elkaar zitten. De huidige implementatie in Java is ongestructureerd. Taken lopen zelfstandig, los van elkaar, er is geen hiërarchie, scope of andere structuur en taken kunnen niet gemakkelijk fouten of annuleringen aan elkaar doorgeven. Deze problemen oplossen leidt tot complexe code. 
-
-Als lezer en schrijver van code hebben we het liefste gestructureerde code dat leest als een sequentieel verhaaltje, want dat reflecteert de structuur van een taak. Maar hoe werkt dat dan met asynchrone code? Een voorbeeld.
+Ook concurrent programming kan gestructureerd of ongestructureerd in elkaar zitten. De huidige implementatie in Java is ongestructureerd. Taken lopen zelfstandig, los van elkaar, er is geen hiërarchie, scope of andere structuur en taken kunnen niet gemakkelijk fouten of annuleringen aan elkaar doorgeven. Een eenvoudig voorbeeld:
 ```java
-Response handle(int userId, int orderId) throws ExecutionException, InterruptedException {
-  Future<User> u = exec.submit(() -> service.find(userId));
+Response handle(int userId, int orderId) 
+	throws ExecutionException, InterruptedException {
+  Future<User>  u = exec.submit(() -> service.find(userId));
   Future<Order> o = exec.submit(() -> service.fetch(orderId));
 
-  var user = u.get();  // 1 
+  var user = u.get();  // 1
   var order = o.get(); // 2
   
   return new Response(user, order);
 }
 ```
-Let op: bij `// 1` en `2` kunnen `ExecutionException` en `InterruptedException` optreden.
+Bij `1` en `2` kunnen `ExecutionException` en `InterruptedException` optreden.
 
 Er is een aantal (verborgen) problemen met deze code:
 - If `find(..)` takes a long time to execute, but `fetch(..)` fails in the meantime, `handle(..)` will wait unnecessarily for `find(..)` by blocking on `u.get()`, rather than cancelling it.
 - If `find(..)` throws an exception, then `u.get()` will throw an exception, but `fetch(..)` will continue to run in its own thread, leading to thread leakage.
 - If the thread executing `handle(..)` is interrupted, the interruption will not propagate to the subtasks: both `find(..)` and `fetch(..)` threads will leak.
 
-Structured Concurrency lost deze problemen op.
+Als programmeur hebben we het liefst gestructureerde code dat leest als een sequentieel verhaaltje, want dat reflecteert de structuur van een taak. Dat is in bovenstaande voorbeeld niet zo. Structured Concurrency lost deze problemen op.
 
 ## Structured concurrency
 De term structured concurrency heeft zijn roots in de 1960's bij het fork-join model, maar het concept is geformuleerd door Sústrik in 2016 voor goroutines. Onafhankelijk daarvan bedacht Elizarov hetzelfde voor Kotlin's coroutines. Hierbij hebben threads een duidelijke hiërarchie, een eigen scope, daardoor entry en exit points. Er ontstaat, net als bij functieaanroepen, een tree van threads met parent-childrelaties. Een scope eindigt pas als alle child threads beëindigd zijn. Het doorgeven van fouten en annulering wordt zo gestroomdlijnd. Dit leidt tot verbeterde betrouwbaarheid en observeerbaarheid. Er is a strict nesting of the lifetimes of operations in a way that mirrors their syntactic nesting in the code.
 
-Hetzelfde voorbeeld als hierboven, maar dan op de structured manier:
+Hetzelfde voorbeeld als hierboven, maar dan structured:
 ```java
-Response handle(int userId, int orderId) throws ExecutionException, InterruptedException {
+Response handle(int userId, int orderId) 
+	throws ExecutionException, InterruptedException {
   try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-    Future<User> u = scope.fork(() -> service.find(userId));
+    Future<User>  u = scope.fork(() -> service.find(userId));
     Future<Order> o = scope.fork(() -> service.fetch(orderId));
 
-    scope.join();           // Join both forks          (can throw InterruptedException)
-    scope.throwIfFailed();  // ... and propagate errors (can throw ExecutionException)
-
-    // Here, both forks have succeeded, so compose their results
-    return new Response(user.resultNow(), order.resultNow());
-	}
+    scope.join();          // 1
+    scope.throwIfFailed(); // 2
+    
+    return new Response(u.resultNow(), o.resultNow()); // 3
+  }
 }
 ```
 
-TODO BRAM nog uitleggen
+Het belangrijkste verschil met de vorige code is dat we hier de threads creëren (`fork`) in een nieuwe `scope`. Deze scope "houdt de threads bij elkaar". Bij `1` wordt er gewacht (`join`) totdat _beide_ threads klaar zijn. Als een van de threads onderbroken werd, treedt hier de `InterruptedException` op. Bij `2` kan een `ExecutionException` gegooid worden als er in een of beide threads een exception optrad. We hebben ervoor gekozen om deze fout(en) te propageren. Dit is optioneel, maar wel zo netjes. Als we bij `3` zijn aangekomen, is alles goed gegaan en kunnen we de resultaten ophalen en verwerken. 
 
 ### How to use 
-Structured concurrency is sinds Java 19 beschikbaar als incubating feature, maar is voor Java 21 gepromoveerd naar preview feature. Dat betekent dat je in Java 21 alleen maar de compiler option `--enable-preview` hoeft te gebruiken om ermee aan de slag te gaan en dat het zeker is dat deze feature, eventueel in iets bijgewerkte vorm, in een latere release terecht komt.
+Structured concurrency is sinds Java 19 beschikbaar als incubating feature, maar is voor Java 21 gepromoveerd naar preview feature. Dat betekent dat je in Java 21 slechts de compiler optie `--enable-preview` hoeft te gebruiken om ermee aan de slag te gaan en dat het zeker is dat deze feature, eventueel in iets bijgewerkte vorm, in een latere release terecht komt.
 
 ### Structured Concurrency and Virtual Threads
 
@@ -114,21 +113,20 @@ BRAM: Deels hierboven al uitgelegd.
 
 (optioneel, als er nog woorden over zijn)
 
-
-
-
 ## Wrap-up
 
 [naam]
 
 ## References
 1. [https://en.wikipedia.org/wiki/Thread_(computing)](https://en.wikipedia.org/wiki/Thread_(computing))
+1. [https://en.wikipedia.org/wiki/Structured_programming](https://en.wikipedia.org/wiki/Structured_programming)
 1. [https://en.wikipedia.org/wiki/Structured_concurrency](https://en.wikipedia.org/wiki/Structured_concurrency)
+1. [https://auroratide.com/posts/understanding-kotlin-coroutines](https://auroratide.com/posts/understanding-kotlin-coroutines)
 
 ## Bios
 
 ### Bram
-Bram Janssens is trainer bij Info Support. Hij houdt ervan om zijn kennis met veel enthousiasme over te dragen. Plezier in het vak vindt hij het belangrijkst!
+Bram Janssens is trainer/consultant bij Info Support. Hij houdt ervan om zijn kennis met veel enthousiasme over te dragen. Plezier in het werk vindt hij het belangrijkst!
 
 ### Hanno
 
