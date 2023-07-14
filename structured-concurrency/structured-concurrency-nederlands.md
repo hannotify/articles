@@ -130,5 +130,5 @@ Bram Janssens is trainer/consultant bij Info Support. Hij houdt ervan om zijn ke
 
 ### Hanno
 
-[Hanno]
+Hanno Embregts is software-architect, conferentiespreker en trainer bij Info Support. Hij houdt ervan als zijn werk afwisselend is; daarom combineert hij Java-softwareontwikkeling met spreken op conferenties en het geven van trainingen bij het Kenniscentrum van Info Support.
 
