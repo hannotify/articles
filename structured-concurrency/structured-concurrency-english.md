@@ -6,7 +6,7 @@ He was being very thorough, because he started listing all the options, and by t
 We could tell he was trying to be patient, but his list recital had been for nothing and he couldn't completely hide his disappointment.
 Concurrent programming with Java can sometimes be exactly like that.
 When you configure a few threads to do work in parallel, some of the work you let them do could potentially be for nothing.
-Java 21 will introduce 'structured concurrency' as a preview feature [1], allowing you to prevent unnecessary work like this.
+Java 21 will introduce 'structured concurrency' as a preview feature, allowing you to prevent unnecessary work like this.
 
 ## Unstructured Concurrency
 
@@ -80,8 +80,8 @@ This is where structured concurrency comes in!
 
 ## Structured Concurrency
 
-The term _structured concurrency_ originates from the 1960s with the fork-join model, but the concept was formulated by Sústrik in 2016 for goroutines [2]. 
-Independently, Elizarov came up with the same concept for Kotlin's coroutines [3].
+The term _structured concurrency_ originates from the 1960s with the fork-join model, but the concept was formulated by Sústrik in 2016 for goroutines [1]. 
+Independently, Elizarov came up with the same concept for Kotlin's coroutines [2].
 So the feature has been prominent in both Go and Kotlin, and will soon also make its introduction in Java!
 
 In a stuctured concurrency approach, threads have a clear hierarchy, their own scope, and clear entry and exit points. 
@@ -175,7 +175,7 @@ That will allow you to have full control over when the scope will shut down and 
 Structured concurrency has been available as an incubating feature since Java 19, but has been promoted to a preview feature in Java 21, which means the feature is now almost complete.
 This means that in order to use the feature in Java 21, you need to pass the compiler option `--enable-preview` to be able to work with it.
 Also note that the feature might be tweaked some more in additional preview statuses based on any feedback developers might have, so be ready to apply certain changes when you upgrade to later versions of Java.
-If you wish to learn even more about structured concurrency, JEP 453 [4] is a very interesting read and comes with some more details that we couldn't fit into this article.
+If you wish to learn even more about structured concurrency, JEP 453 [3] is a very interesting read and comes with some more details that we couldn't fit into this article.
 
 ## Wrap-up
 
@@ -205,10 +205,9 @@ The measure of parallelism is _latency_: the duration of an individual task.
 
 ## References
 
-1. [https://openjdk.org/jeps/453](https://openjdk.org/jeps/453)
-2. [https://en.wikipedia.org/wiki/Structured_concurrency](https://en.wikipedia.org/wiki/Structured_concurrency)
-3. [https://auroratide.com/posts/understanding-kotlin-coroutines](https://auroratide.com/posts/understanding-kotlin-coroutines)
-4. [https://openjdk.org/jeps/453](https://openjdk.org/jeps/453)
+1. [https://en.wikipedia.org/wiki/Structured_concurrency](https://en.wikipedia.org/wiki/Structured_concurrency)
+2. [https://auroratide.com/posts/understanding-kotlin-coroutines](https://auroratide.com/posts/understanding-kotlin-coroutines)
+3. [https://openjdk.org/jeps/453](https://openjdk.org/jeps/453)
 
 ## Bios
 
