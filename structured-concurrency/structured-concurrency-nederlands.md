@@ -95,13 +95,6 @@ BRAM: Deels hierboven al uitgelegd.
 * clarity
 * observability
 
-### Executor Interface Remains Unstructured
-
-[naam]
-
-* To avoid confusion
-* StructuredTaskScope.fork() deliberately returns a Supplier (not a Future) to indicate that its intended use is different
-
 ## Shutdown Policies
 
 [naam]
