@@ -118,7 +118,7 @@ public class StructuredConcurrencyRestaurant implements Restaurant {
 The scope's purpose is to keep the threads together.
 At `1`, we wait (`join`) until _all_ threads are done with their work. 
 If one of the threads is interrupted, an `InterruptedException` is thrown here. 
-At `2`, an `ExecutionException` can be thrown if an exception occurs in one or both of the threads. 
+At `2`, an `ExecutionException` can be thrown if an exception occurs in one of the threads. 
 Once we reach `3`, we can be sure everything has gone well, and we can retrieve and process the results.
 
 Actually, the main difference with the code we had before is the fact that we create threads (`fork`) within a new `scope`. 
